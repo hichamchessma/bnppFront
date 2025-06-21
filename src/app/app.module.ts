@@ -13,11 +13,10 @@ import { BundlesComponent } from './bundles/bundles.component';
 import { BundleComponent } from './bundle/bundle.component';
 import { RequestsComponent } from './requests/requests.component';
 import { KpiRequestsComponent } from './kpi-requests/kpi-requests.component';
-import { SSOComponent } from './sso/sso.component';
-import { SsoCallbackComponent } from './sso-callback/sso-callback.component';
-import { IdentitiesComponent } from './identities/identities.component';
+import { SsoComponent } from './sso/sso.component';
+import { SsoCallbackComponent } from './sso-callback/sso-callback.component';import { IdentitiesComponent } from './identities/identities.component';
 import { RouteReuseStrategy } from '@angular/router';
-import { CacheRouteReuseStrategy } from './common/route-reuse.strategy';
+import { CacheRouteReuseStrategy } from './common/cache-route-reuse.strategy';
 import { HabilitationsComponent } from './habilitations/habilitations.component';
 import { RightsExtractionComponent } from './rights-extraction/rights-extraction.component';
 import { TablesComponent } from './tables/tables.component';
@@ -35,8 +34,8 @@ import { RetrieveUsersRightsComponent } from './retrieve-users-rights/retrieve-u
 import { PerimetersComponent } from './perimeters/perimeters.component';
 import { EcartMyaccessComponent } from './ecart-myaccess/ecart-myaccess.component';
 import { SodComponent } from './sod/sod.component';
-import { MyreportComponent } from './myreport/myreport.component';
-import { CertificationHorsMyaccessComponent } from './certification-hors-myaccess/certification-hors-myaccess.component';
+import { MyrecertComponent } from './myrecert/myrecert.component';
+import { CertificationhorsmyaccessComponent } from './certification-hors-myaccess/certification-hors-myaccess.component';
 import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.component';
 
 @NgModule({
@@ -48,7 +47,7 @@ import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.
       BundleComponent,
       RequestsComponent,
       KpiRequestsComponent,
-      SSOComponent,
+      SsoComponent,
       SsoCallbackComponent,
       IdentitiesComponent,
       HabilitationsComponent,
@@ -66,8 +65,8 @@ import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.
       PerimetersComponent,
       EcartMyaccessComponent,
       SodComponent,
-      MyreportComponent,
-      CertificationHorsMyaccessComponent,
+      MyrecertComponent,
+      CertificationhorsmyaccessComponent,
       RapportComponent
     ],
     imports: [
