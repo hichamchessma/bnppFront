@@ -1,0 +1,160 @@
+<div class="bg-white nav-top px-4 py-2">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-auto">
+            <img src="assets/images/logo.png" alt="Logo" height="35" />
+          </div>
+          <div class="col-auto d-none">
+            <div class="small slogan">{{ traduction.slogan }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 text-end">
+        <img class="me-4 itg-logo" src="assets/images/itg.png" alt="Logo" height="35" />
+        <button routerLink="/sso" *ngIf="checkSSO()" class="small btn btn-success connected-user">
+          <i class="fa-solid fa-circle-user me-1"></i>
+          {{ getGivenName() }} {{ getFamilyName() }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="app">
+    <div id="sidebar" class="active">
+      <div class="sidebar-wrapper active">
+        <div class="sidebar-header pt-5 text-center">
+          <a routerLink="/">
+            <img
+              src="assets/images/Logo_MyAccess_Report_version_compact_et_aere.png"
+              alt="logo"
+              width="40%"
+              onmouseover="this.src='assets/images/Logo_MyAccess_Report_version_compact_et_aere_couleur_inversee.png'"
+              onmouseout="this.src='assets/images/Logo_MyAccess_Report_version_compact_et_aere.png'"
+            />
+          </a>
+        </div>
+  
+        <div class="sidebar-menu">
+          <ul class="menu">
+            <li class="sidebar-item" routerLinkActive="active">
+              <a routerLink="/rights" class="sidebar-link">
+                <i class="fa-solid fa-bars"></i>
+                <span>{{ traduction.roles_catalog }}</span>
+              </a>
+            </li>
+  
+            <li *ngIf="shouldShowAssetsPage()" class="sidebar-item" routerLinkActive="active">
+              <a routerLink="/assets" class="sidebar-link">
+                <i class="fa-solid fa-bars"></i>
+                <span>Assets</span>
+              </a>
+            </li>
+  
+            <ng-container *ngIf="checkSSO()">
+              <li *ngIf="shouldShowRequestsPage()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/requests" class="sidebar-link">
+                  <i class="fa-brands fa-wpforms"></i>
+                  <span>{{ traduction.entitlement_requests }}</span>
+                </a>
+              </li>
+  
+              <li *ngIf="getIsSEC09()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/kpi" class="sidebar-link">
+                  <i class="fa-solid fa-chart-simple"></i>
+                  <span>KPI</span>
+                </a>
+              </li>
+  
+              <!-- Pour surligner le lien KPI lors de KPI demandes -->
+              <li>
+                <a routerLink="/kpi-requests" class="sidebar-link d-none">
+                  <i class="fa-solid fa-chart-bar"></i>
+                  <span>.</span>
+                </a>
+              </li>
+  
+              <li *ngIf="getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/identities" class="sidebar-link">
+                  <i class="fa-regular fa-id-card"></i>
+                  <span>{{ traduction.identities }}</span>
+                </a>
+              </li>
+  
+              <li *ngIf="shouldShowHabilitationsPage()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/habilitations" class="sidebar-link">
+                  <i class="fa-solid fa-table-list"></i>
+                  <span>{{ traduction.entitlements }}</span>
+                </a>
+              </li>
+  
+              <li *ngIf="shouldShowRightsExtractionPage()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/rights-extraction" class="sidebar-link">
+                  <i class="fa-solid fa-arrow-down"></i>
+                  <span>{{ traduction.roles_extraction }}</span>
+                </a>
+              </li>
+  
+              <li *ngIf="shouldShowReportsPage()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/reports" class="sidebar-link">
+                  <i class="fa-solid fa-file-arrow-down"></i>
+                  <span>{{ traduction.statistiques }}</span>
+                </a>
+              </li>
+
+              <li *ngIf="getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/interfacecertification" class="sidebar-link" >
+              <i class="fas fa-award" aria-hidden="true"></i>
+              <span>{{ traduction.certif }}</span>
+            </li>
+
+              <li *ngIf="getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/users" class="sidebar-link" >
+                  <i class="fas fa-circle-user" aria-hidden="true"></i>
+                  <span>{{ traduction.users }}</span>
+                </a>
+              </li>
+  
+              <li *ngIf="getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/perimeters" class="sidebar-link" >
+                  <i class="fa-solid fa-layer-group"></i>
+                  <span>{{ traduction.perimeter }}</span>
+                </a>
+            </li>
+
+              <li class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/sod" class="sidebar-link">
+                  <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
+                  <span>SOD</span>
+                </a>
+              </li>
+
+              <li *ngIf="getIsSEC09() && getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/ecart" class="sidebar-link">
+                  <i class="fa-solid fa-list-check"></i>
+                  <span>{{ traduction.ecartmyaccess }}</span>
+                </a>
+              </li>
+
+              <li *ngIf="getIsCelluleCentraleOrLocale()" class="sidebar-item" routerLinkActive="active">
+                <a routerLink="/certificationExt" class="sidebar-link">
+                  <i class="fa-solid fa-table-list"></i>
+                  <span>{{ traduction.external_certification }}</span>
+                </a>
+              </li>
+            </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+    <header class="mb-1">
+      <div class="nav-btn-open d-block d-xl-none">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

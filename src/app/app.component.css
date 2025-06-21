@@ -1,0 +1,75 @@
+.nav-top {
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    border-bottom: 3px solid #24b859;
+  }
+  
+  .nav-top .slogan {
+    margin-top: 11px;
+  }
+  
+  .nav-btn-open i {
+    cursor: pointer;
+  }
+  
+  @media (max-width: 900px) {
+    .slogan,
+    .itg_logo {
+      display: none;
+    }
+  }
+  
+  .sidebar-menu {
+    padding-bottom: 45px;
+  }
+  
+  .connected-user {
+    height: 35px;
+    color: #fff;
+    background-color: #24b859;
+    border-color: #24b859;
+    line-height: 1;
+    opacity: 1;
+  }
+  
+  #main {
+    padding: 5rem 2rem 0rem 2rem;
+    margin-left: 290px;
+    min-height: 100vh;
+  }
+  
+  @media screen and (max-width: 1199px) {
+    #main {
+      margin-left: 0;
+    }
+  }
+  
+  #main.layout-navbar {
+    padding: 0;
+    transition: margin-left 0.5s ease-out;
+  }
+  
+  #main.layout-horizontal {
+    margin: 0;
+    padding: 0;
+  }
+  
+  #main #main-content {
+    padding: 2rem;
+    flex-grow: 1;
+  }
+  
+  main,
+  #main-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-title {
+    font: 400 25px 'bnpp-sans-condensed', sans-serif;
+    font-weight: 700 !important;
+    color: #008859;
+    margin-top: 10px;
+  }
+  
