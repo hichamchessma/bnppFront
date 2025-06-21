@@ -1,0 +1,59 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  .example-tree-node {
+    display: block;
+  }
+  
+  .example-tree-node .example-tree-node {
+    padding-left: 40px;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+  
+  a,
+  .nav-link {
+    color: green
+  }
+  
+  select {
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  
+  th,
+  td {
+    min-width: 150px !important;
+  }
+  
+  .reports-redirect-link {
+    all: unset;
+    cursor: pointer;
+    text-decoration: none;
+    color: green;
+    font : 14px/1.2 'bnpp-sans' , sans-serif;
+    text-transform: none;
+    float: right;
+    margin: 10px;  
+
+  }
+
+  .card{
+border-radius: 10px;
+box-shadow: 0 6px 10px rgba(0,0,0, .08), 0 0 6px rgba(0, 0, 0, 0.5);
+transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+
+  }

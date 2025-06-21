@@ -1,0 +1,60 @@
+<div *ngIf="!options.proprietaire && !options.cellule_locale && !options.cellule_centrale && !options.csirt">
+    <p>{{ traduction.NotAllowed }}</p>
+  </div>
+  
+  <div *ngIf="options.proprietaire || options.cellule_locale || options.cellule_centrale || options.csirt">
+    <div class="page-heading">
+      <h3> Assets </h3>
+    <div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h4>{{ traduction.assets_report }}</h4>
+      </div>
+      <div class="card-body">
+        <div class="col-12">
+          <div class="col-12">
+            <div *ngIf="options.proprietaire" class="form-check">
+              <input class="form-check-input" type="radio" name="requests-options" id="requests-options-proprietaire" value="1">
+              <label class="form-check-label" for="requests-options-proprietaire">
+                {{ traduction.owner }}
+              </label>
+            </div>
+  
+            <div *ngIf="options.cellule_locale" class="form-check">
+              <input class="form-check-input" type="radio" name="requests-options" id="requests-options-cellule-locale" value="6">
+              <label class="form-check-label" for="requests-options-cellule-locale">
+                {{ traduction.local_cell }}
+              </label>
+            </div>
+  
+            <div *ngIf="options.cellule_centrale" class="form-check">
+              <input class="form-check-input" type="radio" name="requests-options" id="requests-options-cellule-centrale" value="7">
+              <label class="form-check-label" for="requests-options-cellule-centrale">
+                {{ traduction.central_cell }}
+              </label>
+            </div>
+  
+            <div *ngIf="options.csirt" class="form-check">
+              <input class="form-check-input" type="radio" name="requests-options" id="requests-options-csirt" value="8">
+              <label class="form-check-label" for="requests-options-csirt">
+                CSIRT
+              </label>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-12 my-3">
+          <button (click)="generate()" class="btn btn-secondary">{{ traduction.generate }}</button>
+        </div>
+    </div>
+</div>
+        <ng-container *ngIf="!error; else errorTemplate">
+            <div *ngFor="let t of type">
+              <app-tables type="{{t}}"></app-tables>
+            </div>
+          </ng-container>
+          
+          <ng-template #errorTemplate>
+            <p>{{ error }}</p>
+          </ng-template>
+        </div>

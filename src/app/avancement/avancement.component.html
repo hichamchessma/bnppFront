@@ -1,0 +1,333 @@
+<div class="page-heading">
+    <h3>{{traduction.Etat_avancement_des_certifications}}</h3>
+  </div>
+  
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="container-fluid">
+        <p><label class="fw-bold form-label">{{traduction.pole_avancement}} :</label>
+        {{traduction.pole_avancement_desc}}.</p>
+        <p><label class="fw-bold form-label">{{traduction.droits_avancement}} :</label>
+        {{traduction.droits_avancement_desc}}.</p>
+        <h6 *ngIf="!cellule_centrale"><label class="fw-bold form-label"
+          style="color : #248e59;">{{traduction.filtreRapport}}
+          </label> cellule centrale. </h6>
+        <h6 *ngIf="!cellule_centrale"><label class="fw-bold form-label"
+          style="color : #248e59;">{{traduction.filtreRapport}} :</label> {{cellule_locale}}.</h6>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card mb-4">
+    <div class="card-body">
+  
+      <div class="page-heading" *ngIf="cellule_centrale && (currDiv == 'A' || currDiv == 'D')">
+        <h4 style="color : #248e59; margin-left: 1%;">{{traduction.user_pole}}
+          <button *ngIf="currDiv == 'A' || currDiv == 'D'" type="button"
+          (click)="ShowDiv('C'); finishedloader = true ; selectedcertif = '' ; pole_sel=[];selectedpole_de_code=[];
+          pole_de_code=[]; pole = [] ; selectedDate = 'a'; uo_selected_by_user=[]"
+          class="reports-redirect-link">{{traduction.user_droits}} <i
+          class="fa-solid fa-up-right-from-square"></i></button>
+        </h4>
+      </div>
+  
+      <div class="page-heading" *ngIf="currDiv == 'C' || currDiv == 'B'">
+        <h3>{{traduction.user_droits}}
+        <button *ngIf="currDiv == 'C' || currDiv == 'B'" type="button"
+        (click)="ShowDiv('A') ; finishedloader = true ; selectedcertif = '' ; pole_sel=[];selectedpole_de_code=[];
+        pole_de_code=[]; pole = [] ; selectedDate = 'a'; uo_selected_by_user=[]"
+        class="reports-redirect-link">{{traduction.user_pole}} <i
+        class="fa-solid fa-up-right-from-square"></i>
+        </button>
+        </h3>
+      </div>
+      <div *ngIf="currDiv == 'A' || currDiv == 'D'">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="fw-bold form-label">{{traduction.date_avancement_list}}</div>
+              <select (change)="onCheckboxChange()" [(ngModel)]="selectedDate"
+                style="width: 90%; height: 2.5em;">
+                <option value="" disabled selected>choisir une année / select a year</option>
+                <option *ngFor="let t of date" value="{{t.date_de_creation_annee}}">
+                  {{t.date_de_creation_annee}}
+                </option>
+              </select>
+            </div>
+      
+            <div class="col-lg-5">
+              <div class="fw-bold form-label">{{traduction.nom_compagne_avancement_list}}</div>
+              <select [(ngModel)]="selectedCertif" style="width: 90%; height: 2.5em;">
+                <option value="" disabled selected>choisir une ou plusieurs certifications / select one or more certifications</option>
+                <option *ngFor="let t of certification"
+                  value="{{t.nom_de_la_campagne_de_certification}}">
+                  {{t.nom_de_la_campagne_de_certification}}</option>
+              </select>
+            </div>
+      
+            <div class="col-lg-2">
+              <div class="fw-bold form-label"></div>
+              <button [disabled]="!selectedCertif" type="button" class="btn btn-success" (click)="onCheckboxChange0();
+                (click)="ShowDiv('A'); finishLoader = true ;">{{traduction.generate}}</button>
+            </div>
+          </div>
+        </div>
+          <br>
+          <br>
+        
+      </div>
+      
+      <div *ngIf="currDiv == 'C' || currDiv == 'B'">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                  <div class="fw-bold form-label">{{traduction.date_avancement_list}}</div>
+                  <select (change)="onCheckboxChange()" [(ngModel)]="selectedDate" style="width: 90%; height: 2.5em;">
+                    <option *ngFor="let t of date" value="{{t.date_de_creation_annee}}">
+                      {{t.date_de_creation_annee}}
+                    </option>
+                  </select>
+                </div>
+              
+                <div class="col-lg-4">
+                  <div class="fw-bold form-label">{{traduction.nom_compagne_avancement_list}}</div>
+                  <select (change)="onCheckboxChange3()" [(ngModel)]="selectedCertif" style="width: 90%; height: 2.5em;">
+                    <option *ngFor="let t of certification"
+                      value="{{t.nom_de_la_campagne_de_certification}}">
+                      {{t.nom_de_la_campagne_de_certification}}</option>
+                  </select>
+                </div>
+              
+                <div *ngIf="cellule_centrale" class="col-lg-4">
+                  <div class="fw-bold form-label">cellule locale gestionnaire de droits</div>
+                  <select [(ngModel)]="selectedpole_de_code" style="width: 90%; height: 2.5em;">
+                    <option *ngFor="let t of pole_de_code" value="{{t.cellule_gestionnaire_du_droit}}">
+                      {{t.cellule_gestionnaire_du_droit}}</option>
+                  </select>
+                </div>
+              
+                <div class="col-lg-1">
+                  <div class="fw-bold form-label"></div>
+                  <button [disabled]="!cellule_centrale && !selectedpole_de_code[0]" type="button"
+                    class="btn btn-success"
+                    (click)="onCheckboxChange2() ; showDiv('C'); finishLoader = true ;">{{traduction.generate}}</button>
+                </div>
+              </div>
+            </div>
+              <br>
+              <br>
+              </div>
+            </div>        
+        </div>
+        <div style="position:absolute;left:50%;" *ngIf="finishLoader && (currDiv == 'D' || currDiv == 'B')" class="spinner-border text-success">
+
+        </div>
+
+<div style="position: absolute; left: 50%; font-size: 20px;" *ngIf="finishLoader == false && !node"><br>Une erreur est survenue!
+</div>
+
+<div *ngIf="!finishLoader == false && node">
+
+  <!-- <div><div><div> -->
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>{{traduction.etiquette_avancement}}</th>
+        <th>{{traduction.total_avancement}}</th>
+        <th>{{traduction.traite_avancement}}</th>
+        <th>{{traduction.a_traite_avancement}}</th>
+        <th>{{traduction.certifie_avancement}}</th>
+        <th>{{traduction.participation_avancement}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngTemplateOutlet="Recursion; context:{ list: node, level : 230}"></ng-container>
+    </tbody>
+  </table>
+
+  <ng-template #Recursion let-list="list" let-level="level">
+    <ng-container *ngFor="let item of list">
+        <tr>
+
+
+
+      <td style="font-size: 16px;">
+        <button type="button" (click)="clicked(item.nom)"
+          style="cursor: pointer;border: none; background-color: transparent;"
+          [style.margin-left]="level-240 + 'px'">
+          <i *ngIf="item.enfants.length > 0 " class="dropdown-toggle"></i>
+          {{ item.nom }}
+        </button>
+        
+        <button type="button" (click)="clicked2(item.nom)" *ngIf="item.certificateur_nom"
+          class="dropdown-toggle" style="color: green">{{traduction.certificateur}}</button>
+        </td>
+       
+        
+        <ng-container>
+        
+        <!-- [style.margin-left] = "level*240 + 'px'" -->
+        <td style="font-size: 16px;">
+          <div>{{ item.T_total}}</div>
+        
+          <ng-container *ngIf="check_clicked(item.nom) == true && item.enfants.length >= 1 ">
+            <div style="font-size: 12px; color: rgb(109, 109, 109);">(
+              {{item.total}} )
+            </div>
+          </ng-container>
+        </td>
+        
+        <td style="font-size: 16px;">
+          <div>{{ item.T_traite}}</div>
+          <ng-container *ngIf="check_clicked(item.nom) == true && item.enfants.length >= 1 ">
+            <div style="font-size: 12px; color: rgb(109, 109, 109);">(
+              {{item.traite}} )
+            </div>
+          </ng-container>
+        </td>
+        
+        <td style="font-size: 16px;">
+          <div>{{ item.T_a_traite}}</div>
+          <ng-container *ngIf="check_clicked(item.nom) == true && item.enfants.length >= 1 ">
+            <div style="font-size: 12px; color: rgb(109, 109, 109);">(
+              {{item.a_traite}} )
+            </div>
+          </ng-container>
+        </td>
+        
+        <td>
+          <div
+            style="background-color : gray; color : #ffffff; padding: 1px; margin: 1px; font-size: 16px; border-radius: 90px;">
+            <div *ngIf="20 > item.T_certifie"
+              style="background-color : red; border-radius: 90px; border:0px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+              [style.width]="item.T_certifie + '%'"> {{ item.T_certifie }}%
+            </div>
+            <div *ngIf="item.T_certifie >= 20 && 40>item.T_certifie"
+                style="background-color: orange; border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                [style.width]="item.T_certifie + '%'"> {{ item.T_certifie }}%</div>
+              
+              <div *ngIf="item.T_certifie >= 40 && 60>item.T_certifie"
+                style="background-color: rgb(106, 204, 106);border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                [style.width]="item.T_certifie + '%'"> {{ item.T_certifie }}%</div>
+              
+              <div *ngIf="item.T_certifie >= 60 && 80>item.T_certifie"
+                style="background-color: rgb(0, 110, 0); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                [style.width]="item.T_certifie + '%'"> {{ item.T_certifie }}%</div>
+              
+              <div *ngIf="item.T_certifie >= 80"
+                style="background-color: rgb(27, 68, 27); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                [style.width]="item.T_certifie + '%'"> {{ item.T_certifie }}%</div>
+              
+              <ng-container style="font-size: 12px; color: rgb(109, 109, 109);"
+                *ngIf="check_clicked(item.nom) == true && item.enfants.length >= 1 ">
+                ({{item.certifie}}%)
+              </ng-container>
+              
+              </td>
+           
+            
+              <td>
+                <div
+                  style="background-color: gray; color: #ffffff; padding: 1px; margin: 1px; font-size: 16px;border-radius: 90px;">
+                  <div *ngIf="20 > item.T_participation"
+                    style="background-color: red;border-radius: 90px; margin-left: 1px;margin-top: 1px; margin-bottom: 1px;"
+                    [style.width]="item.T_participation + '%'"> {{ item.T_participation }}%
+                  </div>
+              
+                  <div *ngIf="item.T_participation >= 20 && 40>item.T_participation"
+                    style="background-color: orange; border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                    [style.width]="item.T_participation + '%'"> {{ item.T_participation }}%</div>
+              
+                  <div *ngIf="item.T_participation >= 40 && 60>item.T_participation"
+                    style="background-color: rgb(106, 204, 106); border-radius: 90px; margin-left:2px;margin-top: 1px; margin-bottom: 1px;"
+                    [style.width]="item.T_participation + '%'"> {{ item.T_participation }}%</div>
+              
+                  <div *ngIf="item.T_participation >= 60 && 80>item.T_participation"
+                    style="background-color: rgb(0, 110, 0); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                    [style.width]="item.T_participation + '%'"> {{ item.T_participation }}%</div>
+              
+                  <div *ngIf="item.T_participation >= 80"
+                    style="background-color: rgb(27, 68, 27); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+                    [style.width]="item.T_participation + '%'"> {{ item.T_participation }}%
+                </div>
+              </div>
+
+              <ng-container style="font-size: 12px; color: rgb(109, 109, 109);border-radius: 90px;"
+                 *ngIf="check_clicked(item.nom) == true && item.enfants.length >= 1 ">
+                    ({{item.participation}}%)</ng-container>
+                </td>
+
+</ng-container>
+</tr>
+<!-- partie certificateur -->
+<ng-container *ngIf="item.certificateur_nom && check_clicked2(item.nom) == true">
+
+  <ng-container *ngFor="let certif of item.certificateur_nom ; let i = index">
+    <tr>
+      <td>{{item.certificateur_nom[i]}}</td>
+      <td>{{item.recertificateur_total[i]}}</td>
+      <td>{{item.recertificateur_traite[i]}}</td>
+      <td>{{item.recertificateur_a_traite[i]}}</td>
+
+      <td>
+        <div
+          style="background-color: gray; color: #ffffff; padding: 1px; margin: 1px; font-size: 16px;border-radius: 90px;">
+          <div *ngIf="20 > item.recertificateur_T_certifie[i]"
+            style="background-color: red;border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_certifie[i] + '%'">{{item.recertificateur_T_certifie[i]}}%</div>
+
+          <div *ngIf="item.recertificateur_T_certifie[i] >= 20 && 40>item.recertificateur_T_certifie[i]"
+            style="background-color: orange; border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_certifie[i] + '%'">{{item.recertificateur_T_certifie[i]}}%</div>
+
+          <div *ngIf="item.recertificateur_T_certifie[i] >= 40 && 60>item.recertificateur_T_certifie[i]"
+            style="background-color: rgb(106, 204, 106);border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_certifie[i] + '%'">{{item.recertificateur_T_certifie[i]}}%</div>
+
+          <div *ngIf="item.recertificateur_T_certifie[i] >= 60 && 80>item.recertificateur_T_certifie[i]"
+            style="background-color: rgb(0, 110, 0); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_certifie[i] + '%'">{{item.recertificateur_T_certifie[i]}}%</div>
+
+          <div *ngIf="item.recertificateur_T_certifie[i] >= 80"
+            style="background-color: rgb(27, 68, 27); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_certifie[i] + '%'">{{item.recertificateur_T_certifie[i]}}%</div>
+        </div>
+      </td>
+
+
+
+      <td>
+        <div
+          style="background-color: gray; color: #ffffff; padding: 1px; margin: 1px; font-size: 16px; border-radius: 90px;">
+          <div *ngIf="20 > item.recertificateur_T_participation[i]"
+            style="background-color: red;border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_participation[i] + '%'">{{ item.recertificateur_T_participation[i] }}%</div>
+      
+          <div *ngIf="item.recertificateur_T_participation[i] >= 20 && 40>item.recertificateur_T_participation[i]"
+            style="background-color: orange; border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_participation[i] + '%'">{{ item.recertificateur_T_participation[i] }}%</div>
+      
+          <div *ngIf="item.recertificateur_T_participation[i] >= 40 && 60>item.recertificateur_T_participation[i]"
+            style="background-color: rgb(106, 204, 106); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_participation[i] + '%'">{{ item.recertificateur_T_participation[i] }}%</div>
+      
+          <div *ngIf="item.recertificateur_T_participation[i] >= 60 && 80>item.recertificateur_T_participation[i]"
+            style="background-color: rgb(0, 110, 0); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_participation[i] + '%'">{{ item.recertificateur_T_participation[i] }}%</div>
+      
+          <div *ngIf="item.recertificateur_T_participation[i] > 80"
+            style="background-color: rgb(27, 68, 27); border-radius: 90px; margin-left: 2px;margin-top: 1px; margin-bottom: 1px;"
+            [style.width]="item.recertificateur_T_participation[i] + '%'">{{ item.recertificateur_T_participation[i] }}%</div>
+        </div>
+      </td>
+      </tr>
+      </ng-container>
+      </ng-container>
+      
+      <ng-container *ngIf="item.enfants.length > 0 && check_clicked(item.nom) == true ">
+        <ng-container *ngTemplateOutlet="Recursion; context:{ list: item.enfants, level : level + 40 }"></ng-container>
+      </ng-container>
+      </ng-template>
+      
+</div>
+        

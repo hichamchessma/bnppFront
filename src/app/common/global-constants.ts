@@ -4,7 +4,7 @@ export class GlobalConstants {
   // enable SSO
   public static enableSSO = true
   // Variable globale pour le lien API
-  public static apiUrl: string = API.apiURL
+  public static apiURL: string = API.apiURL
   // Show all token
   public static showAllToken: string = "637ca3b437ab08"
   // test mode

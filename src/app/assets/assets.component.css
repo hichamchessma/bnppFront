@@ -1,0 +1,21 @@
+th,
+td {
+    min-width: 290px !important;
+}
+
+.form-check-input:checked {
+    background-color: #248e59;
+    border-color: #248e59;
+}
+
+.form-check-label {
+    line-height: 28px;
+}
+
+.btn-secondary {
+    background-color: #248e59;
+}
+
+.btn-secondary:hover {
+    background-color: #055a2f;
+}
