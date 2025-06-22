@@ -46,8 +46,14 @@ export class GlobalConstants {
 
   public static shouldShowRequestsPage() {
    
-    return localStorage.getItem('shouldShowRightsExtractionPage') === 'true'
+    return localStorage.getItem('shouldShowRequestsPage') === 'true'
 }
+
+public static shouldShowRightsExtractionPage() {
+   
+  return localStorage.getItem('shouldShowRightsExtractionPage') === 'true'
+}
+
 
 public static shouldShowhabilitationsPage() {
   return localStorage.getItem('shouldShowhabilitationsPage') === 'true'

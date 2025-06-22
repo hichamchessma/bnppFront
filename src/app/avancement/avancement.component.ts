@@ -181,7 +181,7 @@ export class AvancementComponent implements OnInit {
                    })
                  }
 
-                 showDiv(divVal: string ) {
+                 ShowDiv(divVal: string ) {
                     this.currDiv = divVal;
                   }
                 

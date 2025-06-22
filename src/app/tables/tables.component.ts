@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tables',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent {
+  @Input() type: string;
   title = 'Tables';
   
   constructor() { }

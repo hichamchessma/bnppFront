@@ -1,0 +1,133 @@
+<div class="card-body">
+    <nav aria-label="breadcrumb">
+      <ul class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a routerLink="/">{{ traduction.home }}</a></li>
+        <li class="breadcrumb-item"><a routerLink="/rights">{{ traduction.roles_catalog }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ traduction.role }} {{id}}</li>
+      </ul>
+    </nav>
+  </div>
+  
+  <ng-container *ngIf="!error; else errorTemplate">
+    <div [ngClass]="{ 'd-none' : finishLoading}" class="text-center mt-5 pt-5">
+      <div class="spinner-border text-success"></div>
+    </div>
+  
+    <div *ngIf="!finishLoading">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{ traduction.role }} {{id}}</h4>
+        </div>
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li *ngIf="historisation.type === 'Profil métier'" class="nav-item" role="presentation">
+              <button class="nav-link active" id="business-tab" data-bs-toggle="tab" data-bs-target="#business-tab-pane" type="button" role="tab"
+                aria-controls="business-tab-pane" aria-selected="true">{{ traduction.business_profil }}</button>
+            </li>
+            <li *ngIf="historisation.type === 'Equipe'" class="nav-item" role="presentation">
+              <button class="nav-link active" id="habilitations-tab" data-bs-toggle="tab" data-bs-target="#habilitations-tab-pane" type="button"
+                role="tab" aria-controls="habilitations-tab-pane" aria-selected="true">{{ traduction.team_members }}</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" [ngClass]="{'active': historisation.type === 'Droit'}" id="historisation-tab" data-bs-toggle="tab"
+                data-bs-target="#historisation-tab-pane" type="button" role="tab" aria-controls="historisation-tab-pane" aria-selected="false">
+                {{ traduction.role_life_cycle }}
+              </button>
+            </li>
+          </ul>
+  
+          <div class="tab-content" id="myTabContent">
+            <div *ngIf="historisation.type === 'Profil métier'" class="tab-pane fade active show" id="business-tab-pane" role="tabpanel"
+              aria-labelledby="business-tab" tabindex="0">
+              <div class="col-lg-8 col-12">
+                <table class="table-responsive table table-hover table-lg">
+                    <thead>
+                        <tr>
+                          <th>{{ traduction.code_unique }}</th>
+                          <th>{{ traduction.libelle }}</th>
+                          <th>{{ traduction.code_asset }}</th>
+                          <th>{{ traduction.libelle_asset }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let l of liste_droits">
+                          <td>{{ l.code_unique }}</td>
+                          <td>{{ l.libelle }}</td>
+                          <td>{{ l.code_asset }}</td>
+                          <td>{{ l.libelle_asset }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div *ngIf="historisation.type == 'Equipe'" class="tab-pane fade active show" id="habilitations-tab-pane" role="tabpanel"
+                  aria-labelledby="habilitations-tab" tabindex="0">
+                  <div class="col-lg-4 col-12">
+                    <div class="table-responsive">
+                      <table class="mt-5 table table-hover table-lg">
+                        <thead>
+                          <tr>
+                            <th>{{ traduction.members_identity }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let habilitation of habilitations">
+                            <td><i class="fa-solid fa-user me-1"></i> {{ habilitation.display_name }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" [ngClass]="{'active show': historisation.type == 'Droit'}" id="historisation-tab-pane" role="tabpanel"
+                  aria-labelledby="historisation-tab" tabindex="0">
+                  <div class="table-responsive">
+                    <table class="mt-5 table table-hover table-lg">
+                        <thead>
+                            <tr>
+                              <th>{{ traduction.attribute }}</th>
+                              <th>{{ traduction.current_value }}</th>
+                              <th>{{ traduction.change }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let key of keys">
+                              <td>{{ traduction[key] }}</td>
+                              <td>
+                                <ng-container *ngIf="isArray(historisation[key]); else stringTemplate">
+                                  <span *ngIf="historisation[key].length">{{ historisation[key].at(-1).value }}</span>
+                                </ng-container>
+                                <ng-template #stringTemplate>{{ historisation[key] }}</ng-template>
+                              </td>
+                              <td>
+                                <ng-container *ngIf="isArray(historisation[key]) && historisation[key].length > 1">
+                                  <table class="table table-bordered table-changement">
+                                    <thead>
+                                      <tr>
+                                        <th>Date</th>
+                                        <th>{{ traduction.change }}</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let history of historisation[key]">
+                                        <td>{{ history.date }}</td>
+                                        <td>{{ history.value }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
+<ng-template #errorTemplate>
+<p>{{ error}}</p>
+    </ng-template>

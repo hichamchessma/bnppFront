@@ -1,0 +1,21 @@
+.shadowbox {
+    height: 50%;
+    border: 1px solid #248e59;
+    padding: 2% 3px;
+    margin-bottom: 2%;
+    background-color: #fff;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+  
+  select:hover {
+    cursor: pointer;
+  }
+  

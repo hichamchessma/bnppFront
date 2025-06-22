@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Traduction } from '../common/Traduction';
+
 
 @Component({
   selector: 'app-bundles',
@@ -6,9 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./bundles.component.css']
 })
 export class BundlesComponent {
-  title = 'Bundles';
+  protected traduction: any
   
-  constructor() { }
+  constructor() { 
+    this.traduction=Traduction.get()
+  }
   
   ngOnInit(): void {
   }
