@@ -35,7 +35,7 @@ import { PerimetersComponent } from './perimeters/perimeters.component';
 import { EcartMyaccessComponent } from './ecart-myaccess/ecart-myaccess.component';
 import { SodComponent } from './sod/sod.component';
 import { MyrecertComponent } from './myrecert/myrecert.component';
-import { CertificationhorsmyaccessComponent } from './certification-hors-myaccess/certification-hors-myaccess.component';
+import { CertificationHorsMyaccessComponent } from './certification-hors-myaccess/certification-hors-myaccess.component';
 import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.component';
 
 @NgModule({
@@ -66,7 +66,7 @@ import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.
       EcartMyaccessComponent,
       SodComponent,
       MyrecertComponent,
-      CertificationhorsmyaccessComponent,
+      CertificationHorsMyaccessComponent,
       RapportComponent
     ],
     imports: [

@@ -1,23 +1,31 @@
 @font-face {
     font-family: "bnpp-sans";
-    src: url("assets/bnpp-sans/bnpp-sans-bold.ttf");
+    src: local("Arial"), local("sans-serif");
+
+   /*  src: url("assets/bnpp-sans/bnpp-sans-bold.ttf");*/
     font-weight: bold
   }
   
   @font-face {
     font-family: "bnpp-sans";
-    src: url("assets/bnpp-sans/bnpp-sans.ttf");
+    src: local("Arial Bold"), local("sans-serif");
+
+    /* src: url("assets/bnpp-sans/bnpp-sans.ttf");*/
   }
   
   @font-face {
     font-family: "bnpp-sans-condensed";
-    src: url("assets/bnpp_sans-condensed/bnpp-sans-cond-bold-v2.ttf");
+    src: local("Arial Narrow"), local("sans-serif-condensed");
+
+    /* src: url("assets/bnpp_sans-condensed/bnpp-sans-cond-bold-v2.ttf");*/
     font-weight: bold;
   }
   
   @font-face {
     font-family: "bnpp-sans-condensed";
-    src: url("assets/bnpp_sans-condensed/bnpp-sans-cond-v2.ttf");
+    src: local("Arial Narrow Bold"), local("sans-serif-condensed");
+
+   /* src: url("assets/bnpp_sans-condensed/bnpp-sans-cond-v2.ttf");*/
   }
   
   table {

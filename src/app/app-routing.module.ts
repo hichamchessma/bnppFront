@@ -5,10 +5,11 @@ import { HomeComponent } from './home/home.component';
 import { BundlesComponent } from './bundles/bundles.component';
 import { TablesComponent } from './tables/tables.component';
 import { KpiComponent } from './kpi/kpi.component';
+import { BundleComponent } from './bundle/bundle.component';
 import { RequestsComponent } from './requests/requests.component';
 import { KpiRequestsComponent } from './kpi-requests/kpi-requests.component';
 import { IdentitiesComponent } from './identities/identities.component';
-import { SSOComponent } from './sso/sso.component';
+import { SsoComponent } from './sso/sso.component';
 import { SsoCallbackComponent } from './sso-callback/sso-callback.component';
 import { HabilitationsComponent } from './habilitations/habilitations.component';
 import { RightsExtractionComponent } from './rights-extraction/rights-extraction.component';
@@ -29,7 +30,7 @@ import { GlobalConstants } from './common/global-constants';
 import { CertificationBilanComponent } from './certification-bilan/certification-bilan.component';
 import { EcartMyaccessComponent } from './ecart-myaccess/ecart-myaccess.component';
 import { SodComponent } from './sod/sod.component';
-import { MyreportComponent } from './myreport/myreport.component';
+import { MyrecertComponent } from './myrecert/myrecert.component';
 import { CertificationHorsMyaccessComponent } from './certification-hors-myaccess/certification-hors-myaccess.component';
 import { RapportComponent } from './certification-hors-myaccess/rapport/rapport.component';
 
@@ -51,7 +52,7 @@ if (GlobalConstants.enableSSO) {
     { path: 'habilitations', component: HabilitationsComponent, title: 'Habilitations' },
     { path: 'rights-extraction', component: RightsExtractionComponent, title: 'Extraction des droits' },
     { path: 'reports', component: ReportsComponent, title: 'Reports' },
-    { path: 'sso', component: SSOComponent, title: 'SSO' },
+    { path: 'sso', component: SsoComponent, title: 'SSO' },
     { path: 'avancement', component: AvancementComponent, title: 'Avancement' },
     { path: 'certificationBilan', component: CertificationBilanComponent, title: 'Certification' },
     { path: 'interfacecertification', component: InterfaceCertificationComponent, title: 'Certification' },

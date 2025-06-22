@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './certification-hors-myaccess.component.html',
   styleUrls: ['./certification-hors-myaccess.component.css']
 })
-export class CertificationhorsmyaccessComponent {
+export class CertificationHorsMyaccessComponent {
   title = 'Certificationhors-myaccess';
   
   constructor() { }

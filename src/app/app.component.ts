@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   }
 
   protected getIsSEC09() {
-    return GlobalConstants.isSEC09();
+    return GlobalConstants.getIsSEC09();
   }
 
   protected getIsCelluleCentraleOrLocale() {
@@ -76,11 +76,11 @@ export class AppComponent implements OnInit {
   }
 
   protected shouldShowHabilitationsPage() {
-    return GlobalConstants.shouldShowHabilitationsPage();
+    return GlobalConstants.shouldShowhabilitationsPage();
   }
 
   protected shouldShowReportsPage() {
-    return GlobalConstants.shouldShowReportsPage();
+    return GlobalConstants.shouldShowreportsPage();
   }
 
   protected shouldShowAssetsPage() {
