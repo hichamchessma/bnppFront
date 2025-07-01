@@ -1,1 +1,172 @@
-<p>rapport works!</p>
+<div>
+    <div [ngClass]="{'d-none' : finishLoader}" class="text-center mt-5 pt-5">
+      <div class="spinner-border text-success">x</div>
+    </div>
+  </div>
+  <div *ngIf="authCertif">
+    <form >
+    <div *ngIf="!isCelluleLoc && !isPoleBenef">
+      <div class="page-heading">
+        <h3>{{traduction.typeRapport}}</h3>
+        <div class="card mb-4" style="background-color: #E9FBF4;">
+          <!-- <p style="font-size: 18px">{{traduction.generateReportWays}}</p> -->
+          <p><label class="fw-bold form-label">{{traduction.polePrincipal}}</label> {{traduction.poleGenerate}}</p>
+          <p><label class="fw-bold form-label">{{traduction.celluleLocal}}</label> {{traduction.cellGenerate}}</p>
+        </div>
+        <p *ngIf="rafraichissement" style="font-size: 12px; color: rgb(194, 9, 9);">
+          <i class="fas fa-exclamation-triangle" style="font-size:20px ; color: rgb(194, 9, 9);"></i>&nbsp;{{traduction.rafraichissement2}}
+        </p>
+        <div class="ps-1">
+          <div class="row">
+            <div class="col-xl" *ngIf="authCertif">
+              <a (click)="onClickPoleBenef()" class="card py-3 cell">
+                <div class="card-header" style="color:#24e859;">
+                  <h4 class="mb-0 text-center"><i class="fas fa-file"></i> {{traduction.polePrincipal}}</h4>
+                </div>
+              </a>
+            </div>
+  
+            <div class="col-xl" *ngIf="authCertif">
+              <a (click)="onClickCelluleCL()" class="card py-3 cell">
+                <div class="card-header" style="color:#24e859;">
+                  <h4 class="mb-0 text-center"><i class="fas fa-file"></i> {{traduction.celluleLocal}}</h4>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="touteLeContenu">
+        <div class="page-heading">
+          <div class="card mb-4">
+            <div class="card-body">
+    <h5 style="color : #24e859;">{{traduction.filtreAreaReport}}</h5>
+    <br>
+    <p *ngIf="isPoleBenef"><label class="fw-bold form-label">{{traduction.pole2}}</label> {{v3poleDeLaPersonne}}</p>
+    <p *ngIf="isCelluleLoc">{{traduction.filtreCelloc}}<label class="fw-bold form-label"> {{v3poleDeLaPersonne2}}</label> {{traduction.gestionnaire}}</p>
+    <p *ngIf="contenuVisible || contenuVisible2"><label class="fw-bold form-label">{{traduction.AnneeCertif}}</label> {{selectionMotDate}}</p>
+    <div *ngIf="contenuVisible"><label class="fw-bold form-label">{{traduction.camp_certif2}}</label>
+      <p *ngFor="let user of selectionMotCampagnes">{{ user.nom_de_la_campagne_de_certification }}</p>
+    </div>
+</div>
+</div>
+    <p *ngIf="rafraichissement" style="font-size: 12px; color: rgb(194, 9, 9);">
+      <i class="fas fa-exclamation-triangle" style="font-size:20px ; color: rgb(194, 9, 9);"></i>&nbsp;{{traduction.rafraichissement2}}
+    </p>
+</div>
+    
+    <!-- NEW PART V3 -->
+    <div *ngIf="contenuVisible3">
+        <div class="text-end">
+          <span class="retour-page-précédente" name="retour-page-précédente" (click)="reloadPage()">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;{{ traduction.retour_page_prec }}
+          </span>
+        </div>
+      
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 *ngIf="isPoleBenef" class="form-row align-items-center" style="color : #24e859;">
+              {{ traduction.pole_principal }}
+            </h5>
+            <h5 *ngIf="isCelluleLoc" class="form-row align-items-center" style="color : #24e859;">
+              {{ traduction.cl_gest_dr }}
+            </h5>
+      
+            <div class="row">
+              <div class="col-12 col-xl-5 mb-4">
+                <div class="form-row align-items-center">
+                  <div class="col-auto my-1">
+                    <label class="fw-bold form-label" for="inlineFormCustomSelect">{{ traduction.etape1_annee_certif }}</label>
+                    <!-- <h5 for="inlineFormCustomSelect">{{ traduction.etape1_annee_certif }}</h5> -->
+                  </div>
+                </div>
+                
+                <select *ngIf="isPoleBenef" (change)="onAnneeSelection()" [(ngModel)]="selectionMotDate"
+                        style="width: 90%; height: 2.5em;" [ngModelOptions]="{standalone: true}">
+                  <option value="" disabled selected>Choisir une année (obligatoire) / select a year (mandatory)</option>
+                  <option *ngFor="let i of v3dropdownListDateStage1" value="{{i.substr}}">
+                    {{i}}
+                  </option>
+
+
+
+                </select>
+                <select *ngIf="isCelluleLoc" (change)="onAnneeSelectionCL()" [(ngModel)]="selectionMotDate"
+                  style="width: 90%; height: 2.5em;" [ngModelOptions]="{standalone: true}">
+                  <option value="" disabled selected>Choisir une année (obligatoire) / select a year (mandatory)</option>
+                  <option *ngFor="let i of v3dropdownListDateStage2" value="{{i.substr}}"> {{i}}</option>
+                </select>
+
+            </div>
+                
+                <div class="col-12 col-xl-5 mb-4">
+                  <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                      <label class="fw-bold form-label" for="inlineFormCustomSelect">{{ traduction.camp_certif }}</label>
+                    </div>
+                  </div>
+                
+                  <ng-multiselect-dropdown *ngIf="isPoleBenef" [(ngModel)]="selectedCampagnes"
+                    [ngModelOptions]="{standalone: true}" id="inlineFormCustomSelectBeneficiaire"
+                    [placeholder]="'Choisir une ou des campagnes de certification / select one or more certification campaigns'"
+                    [settings]="v3dropdownSettingsCampagnesStage"
+                    [data]="listDesCampagneCertif" (onSelect)="onSelectPoleCampagnes($event)"
+                    (onSelectAll)="onSelectAllPoleCampagnes($event)" (onDeSelect)="onDeselectPoleCampagnes($event)"
+                    (onDeSelectAll)="onDeselectAllPoleCampagnes($event)"></ng-multiselect-dropdown>
+                
+                  <ng-multiselect-dropdown *ngIf="isCelluleLoc" [(ngModel)]="selectedCampagnes"
+                    [ngModelOptions]="{standalone: true}" id="inlineFormCustomSelectBeneficiaire"
+                    [placeholder]="'Choisir une ou des campagnes de certification / select one or more certification campaigns'"
+                    [settings]="v3dropdownSettingsCampagnesStage"
+                    [data]="listDesCampagneCertif" (onSelect)="onSelectPoleCampagnes($event)"
+                    (onSelectAll)="onSelectAllPoleCampagnes($event)" (onDeSelect)="onDeselectPoleCampagnes($event)"
+                    (onDeSelectAll)="onDeselectAllPoleCampagnes($event)"></ng-multiselect-dropdown>
+                </div>
+                
+                <div class="col-12 col-xl-2 mb-4">
+                  <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                      <label class="fw-bold form-label" for="inlineFormCustomSelect"> </label>
+                    </div>
+                  </div>
+                
+                  <div style="margin : auto;margin-top:27px;" class="text-center">
+                    <button class="btn btn-secondary" name="btnGenerer" *ngIf="isPoleBenef"
+                      (click)="contenuVisible = true ; contenuVisible3 = false ; genererTableauRapportPoleBenef()"
+                      [disabled]="selectionMotCampagnes==null">{{traduction.generer}}</button>
+                
+                    <button class="btn btn-secondary" name="btnGenerer" *ngIf="isCelluleLoc"
+                      (click)="contenuVisible = true ; contenuVisible3 = false ; genererTableauRapportCelluleLocale()"
+                      [disabled]="selectionMotCampagnes==null">{{traduction.generer}}</button>
+                  </div>
+                </div>
+                
+            </div>
+
+                <div class="col-12 my-3" *ngIf="selectionMotDateEgalA1FirstTime">
+                    <span style="color: red">{{ traduction.selec_une_annee }}</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+                  <div class="card p-4" *ngIf="contenuVisible">
+                    <h5 style="color : #24e859;">{{ traduction.rapport }}</h5>
+                    <div class="text-end">
+                      <span class="reset-filter" *ngIf="contenuVisible" (click)="contenuVisible = false ; reloadPage()" style="color: #24e859">
+                        <i class="fa fa-refresh" aria-hidden="true"></i> {{ traduction.generer_rapport }}
+                      </span>
+                    </div>
+                  
+                    <div *ngIf="!contenuVisibleTableauSansPointRight && !contenuVisibleTableauAvecPointRight && type">
+                      <app-tables type="{{type}}" [selectionMotCampagnes]="selectionMotCampagnes" [selectionMotDate]="selectionMotDate">
+                      </app-tables>
+                    </div>
+                  </div>
+                </div>
+        </form>
+    </div>
+                  <div *ngIf="!authCertif">
+                    <p>{{ traduction.inaccessible }}</p>
+                  </div>
+                  
